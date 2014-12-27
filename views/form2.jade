@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  h1= title
+  p Formularz
+
+  script.
+    var socket = new WebSocket("ws://localhost:8080/");
+    socket.onopen = function(){
+        console.log("sent message");
+    }
+
+    socket.onmessage = function(e){
+        var server_message = e.data;
+        $('#dynamicDiv').html(server_message);
+    };
+
+    function onChange() {
+        console.log($('#select_1').val());
+        socket.send($('#select_1').val());
+    };
+
+  #myDiv
+   form(id='formId', action="/form/submit", method="post")
+    select#select_1(name='Lista', accesskey='i', tabindex='9', onchange="onChange()")
+     option#option_1(value='pierwszy') pierwszy
+     option#option_2(value='drugi') drugi
+     option#option_3(value='trzeci') trzeci
+     option#option_4(value='czwarty') czwarty
+  #dynamicDiv
+   
+

@@ -1,0 +1,82 @@
+extends layout
+
+block content
+
+ #listener
+  embed(id="nacl", width=0 height=0, src="/nacl/nacl.nmf", type="application/x-pnacl")
+
+ script.
+    var listener = document.getElementById('listener');
+    console.log(listener);
+    listener.addEventListener('message', handleMessage, true);
+    
+    function handleMessage(message_event) {
+      alert(message_event.data);
+    }
+
+ .jumbotron
+  h1 Formularz 1
+  link(rel='stylesheet', href='/stylesheets/login_bootstrap.css')
+  p
+    | To jest przykładowy formularz zawierający wszystkie rodzaje pól z HTML5
+ 
+
+  #myDiv
+   form(id='formId', action="/form/submit", method="post" class="form-signin")
+    br
+    | Pole tekstowe:
+    input(type='text', name='input_text', accesskey='a', tabindex='1' class="form-control")
+    br
+    | Pole hasło:
+    input(type='password', name='input_pass', accesskey='b', tabindex='2' class="form-control")
+    br
+    br
+    br
+    input#checkbox_1(type='checkbox', name='check', value='pierwsza', accesskey='c', tabindex='3' class="form-control")
+    | Pierwszy
+    br
+    input#checkbox_2(type='checkbox', name='check', value='druga', accesskey='d', tabindex='4' class="form-control")
+    | Drugi
+    br
+    input#checkbox_3(type='checkbox', name='check', value='trzecia', accesskey='e', tabindex='5' class="form-control")
+    | Trzeci
+    br
+    br
+    br
+    fieldset
+     input#radio_1(type='radio', name='group', value='jeden', accesskey='f', tabindex='6' class="form-control")
+     | Jeden
+     br
+     input#radio_2(type='radio', name='group', value='dwa', accesskey='g', tabindex='7' class="form-control")
+     | Dwa
+     br
+     input#radio_3(type='radio', name='group', value='trzy', accesskey='h', tabindex='8' class="form-control")
+     | Trzy
+     br
+    br
+    br
+    select#select_1(name='Lista', accesskey='i', tabindex='9' class="form-control")
+     option#option_1(value='pierwszy' ) pierwszy
+     option#option_2(value='drugi') drugi
+     option#option_3(value='trzeci') trzeci
+     option#option_4(value='czwarty') czwarty
+    br
+    br
+    select#select_2(name='lista', multiple='multiple', size='4', accesskey='j', tabindex='10' class="form-control")
+     option#option_sel2_1 1
+     option#option_sel2_2 2
+     option#option_sel2_3 3
+     option#option_sel2_4 4
+     option#option_sel2_5 5
+     option#option_sel2_6 6
+    br
+    br
+    textarea#textarea_1(rows='10', cols='30', accesskey='k', tabindex='11' class="form-control")
+     | Obszar tekstowy
+    br
+    br
+    .form-actions
+        input#submit_1(type='submit', value='submit', accesskey='l', tabindex='12' class="btn btn-primary")
+        input#reset_1(type='reset', value='reset', accesskey='m`', tabindex='13' class="btn")
+    br
+

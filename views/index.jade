@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  link(rel='stylesheet', href='/stylesheets/login_bootstrap.css')
+  script(src="http://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/md5.js")
+  script.
+    function buttonClicked() {
+      var pass = document.getElementById('pass').value;
+      var username = document.getElementById('user').value;
+      var passhash = CryptoJS.MD5(pass).toString();
+      console.log("Clicked");
+      $.post(
+        '/login', 
+        { user: username, pass: passhash }
+      );
+    }
+
+  form(name="login", action="javascript:buttonClicked()", method="post", class="form-signin")
+      <h2 class="form-signin-heading">Podaj dane:</h2>
+      input(type="text", name="user" id='user' class="form-control" placeholder="login" )
+      input(type="password", name="pass" id='pass' class="form-control" placeholder="hasło" )
+      input(type="submit", value="Zaloguj" class="btn btn-lg btn-primary btn-block")
